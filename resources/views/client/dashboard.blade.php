@@ -3,55 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TicketFlow | Dashboard Développeur</title>
+    <title>TicketFlow | Tableau de Bord Client</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .dev-gradient { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); }
+        .client-gradient { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="dev-gradient">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center space-x-3">
-                            <div class="bg-white/10 p-2 rounded-lg">
-                                <i class="fas fa-code text-white text-xl"></i>
-                            </div>
-                            <span class="text-white text-lg font-semibold">TicketFlow Dev</span>
-                        </div>
-                    </div>
+    <nav class="client-gradient p-4 text-white">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white/10 p-2 rounded-lg">
+                    <i class="fas fa-ticket-alt text-white text-xl"></i>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <!-- Time -->
-                    <div class="hidden md:flex items-center space-x-2 bg-white/10 px-3 py-1 rounded-lg">
-                        <i class="far fa-clock text-white"></i>
-                        <span class="text-white text-sm">2025-02-28 11:59:25 UTC</span>
-                    </div>
-                    <!-- Notifications -->
-                    <button class="relative p-2 text-white hover:bg-white/10 rounded-lg transition-colors">
-                        <i class="fas fa-bell"></i>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                    </button>
-                    <!-- Profile & Logout -->
-                    <div class="flex items-center space-x-4">
-                        <img src="https://ui-avatars.com/api/?name=Salma+Hamdi&background=2563eb&color=fff" class="h-8 w-8 rounded-lg" alt="Salma Hamdi">
-                        <span class="text-white text-sm font-medium">Salma Hamdi</span>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="text-sm text-red-600 font-medium hover:underline">
-                                Déconnexion
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                <span class="text-lg font-semibold">TicketFlow</span>
             </div>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="bg-red-500 px-3 py-1 rounded-lg text-sm hover:bg-red-600 transition">Déconnexion</button>
+            </form>
         </div>
     </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Bienvenue, @saalmahm 👋</h1>
+            <p class="text-gray-600">Gérez vos tickets et suivez leur progression</p>
+        </div>
+
+        <button onclick="document.getElementById('createTicketModal').classList.remove('hidden')" 
+                class="mb-8 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+            <i class="fas fa-plus"></i>
+            <span>Créer un nouveau ticket</span>
+        </button>
+
+        <!-- Create Ticket Modal -->
+        <div id="createTicketModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-900">Créer un nouveau ticket</h3>
+                    <button onclick="document.getElementById('createTicketModal').classList.add('hidden')" 
+                            class="text-gray-400 hover:text-gray-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Titre</label>
+                        <input type="text" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                               placeholder="Titre descriptif du problème">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Description</label>
+                        <textarea rows="3" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                  placeholder="Description détaillée du problème"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Priorité</label>
+                            <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option>Haute</option>
+                                <option>Moyenne</option>
+                                <option>Basse</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Système d'exploitation</label>
+                            <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option>Windows 11</option>
+                                <option>Windows 10</option>
+                                <option>macOS</option>
+                                <option>Linux</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Logiciel concerné</label>
+                        <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option>TicketFlow v2.0</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button type="button" onclick="document.getElementById('createTicketModal').classList.add('hidden')"
+                                class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition">Annuler</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
