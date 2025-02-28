@@ -29,8 +29,9 @@
                         <i class="far fa-clock mr-2"></i>
                         2025-02-25 22:17:37 UTC
                     </span>
-                    <div class="relative group">
-                        <button class="flex items-center space-x-3 text-white hover:bg-white/10 rounded-lg p-2 transition-all">
+                    <!-- Avatar + Dropdown -->
+                    <div class="relative">
+                        <button id="dropdownButton" class="flex items-center space-x-3 text-white hover:bg-white/10 rounded-lg p-2 transition-all">
                             <img src="https://ui-avatars.com/api/?name=Salma+Hamdi&background=8b5cf6&color=fff" 
                                  class="h-8 w-8 rounded-lg border-2 border-white/20"
                                  alt="Profile">
@@ -40,7 +41,8 @@
                             </div>
                             <i class="fas fa-chevron-down text-xs opacity-50"></i>
                         </button>
-                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden group-hover:block">
+                        <!-- Menu Dropdown -->
+                        <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                 <i class="fas fa-user mr-2 text-indigo-600"></i>Mon Profil
                             </a>
@@ -48,9 +50,12 @@
                                 <i class="fas fa-cog mr-2 text-indigo-600"></i>Paramètres
                             </a>
                             <hr class="my-2">
-                            <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
-                                <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
-                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -125,5 +130,24 @@
             </div>
         </div>
     </div>
+
+    <!-- Script -->
+    <script>
+        function toggleDropdown() {
+            document.getElementById("dropdownMenu").classList.toggle("hidden");
+        }
+
+        document.getElementById("dropdownButton").addEventListener("click", function(event) {
+            event.stopPropagation();
+            toggleDropdown();
+        });
+
+        document.addEventListener("click", function(event) {
+            const dropdown = document.getElementById("dropdownMenu");
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.add("hidden");
+            }
+        });
+    </script>
 </body>
 </html>
