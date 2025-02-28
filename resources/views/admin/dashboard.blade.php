@@ -69,10 +69,15 @@
                 <button class="text-gray-500 hover:text-gray-600">
                     <i class="fas fa-cog text-xl"></i>
                 </button>
-                <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-                    <i class="fas fa-sign-out-alt mr-2"></i>
-                    Déconnexion
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                        onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
                 </button>
+            </form>
+
             </div>
         </header>
 
