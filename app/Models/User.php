@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'role'];
 
     // Relations
     public function client()
@@ -36,4 +36,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class, 'assignedTo');
     }
+
+    public function isAdmin() {
+        return $this->role === 'admin';
+    }
+    
+    public function isDeveloper() {
+        return $this->role === 'developer';
+    }
+    
+    public function isClient() {
+        return $this->role === 'client';
+    }
+    
 }
+?>
