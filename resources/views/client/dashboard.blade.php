@@ -97,10 +97,47 @@
         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Ajouter</button>
     </div>
 </form>
-
-
             </div>
         </div>
+
+        <div class="container mx-auto">
+    <!-- Tickets Table -->
+    <div class="mt-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Vos Tickets</h2>
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2">Titre</th>
+                    <th class="py-2">Description</th>
+                    <th class="py-2">Priorité</th>
+                    <th class="py-2">Système d'exploitation</th>
+                    <th class="py-2">Logiciel concerné</th>
+                    <th class="py-2">Statut</th>
+                    <th class="py-2">Date de création</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($tickets as $ticket)
+                <tr>
+                    <td class="py-2">{{ $ticket->title }}</td>
+                    <td class="py-2">{{ $ticket->description }}</td>
+                    <td class="py-2">{{ $ticket->priority }}</td>
+                    <td class="py-2">{{ $ticket->os }}</td>
+                    <td class="py-2">{{ $ticket->software }}</td>
+                    <td class="py-2">{{ $ticket->status }}</td>
+                    <td class="py-2">
+                        @if($ticket->creationDate)
+                            {{ $ticket->creationDate->format('Y-m-d') }}
+                        @else
+                            N/A
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
     </main>
 </body>
 </html>

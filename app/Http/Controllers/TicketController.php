@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 
 class TicketController extends Controller
 {
+    public function index()
+    {
+        $tickets = Ticket::where('createdBy', Auth::id())->get();
+        return view('client.dashboard', compact('tickets')); 
+    }
+
     public function store(Request $request)
     {
         // Log the incoming request data
@@ -23,21 +28,6 @@ class TicketController extends Controller
             'software'    => 'required|string',
         ]);
 
-        // Debugging: Log the validated data
-        Log::info('Validated data: ', $validatedData);
-
-        // Debugging: Log data before insertion
-        Log::info('Data before insertion: ', [
-            'title'       => $validatedData['title'],
-            'description' => $validatedData['description'],
-            'priority'    => $validatedData['priority'],
-            'os'          => $validatedData['os'],
-            'software'    => $validatedData['software'],
-            'creationDate'=> now(),
-            'status'      => 'Ouvert',
-            'createdBy'   => Auth::id(),
-        ]);
-
         Ticket::create([
             'title'       => $validatedData['title'],
             'description' => $validatedData['description'],
@@ -49,6 +39,6 @@ class TicketController extends Controller
             'createdBy'   => Auth::id(),
         ]);
 
-        return redirect()->back()->with('success', 'Ticket créé avec succès !');
+        return redirect()->route('tickets.index')->with('success', 'Ticket créé avec succès !');
     }
 }

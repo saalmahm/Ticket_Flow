@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Tableau de bord Client + Gestion des Tickets
     Route::middleware('role:client')->group(function () {
-        Route::get('/client/dashboard', [HomeController::class, 'clientDashboard'])->name('client.dashboard');
+        Route::get('/client/dashboard', [TicketController::class, 'index'])->name('client.dashboard');
 
         // Routes CRUD pour les tickets
         Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store'); // Ajouter un ticket
