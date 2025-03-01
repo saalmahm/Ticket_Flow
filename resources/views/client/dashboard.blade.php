@@ -32,7 +32,7 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-8">
         <div class="mb-8">
-            <h1 class="text-2xl font-bold text-gray-900">Bienvenue, @saalmahm 👋</h1>
+            <h1 class="text-2xl font-bold text-gray-900">Bienvenue, {{ Auth::user()->name }} 👋</h1>
             <p class="text-gray-600">Gérez vos tickets et suivez leur progression</p>
         </div>
 
