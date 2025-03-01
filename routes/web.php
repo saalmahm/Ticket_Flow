@@ -20,12 +20,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Tableau de bord Admin
     Route::middleware('role:admin')->group(function () {
-        Route::get('/admin/dashboard', [HomeController::class, 'adminDashboard'])->name('admin.dashboard');
+        Route::get('/admin/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+
+        Route::get('/admin/tickets', function () {
+            return view('admin.tickets');
+        })->name('admin.tickets'); // Route pour la page des tickets
     });
 
     // Tableau de bord Développeur
     Route::middleware('role:developer')->group(function () {
-        Route::get('/developer/dashboard', [HomeController::class, 'developerDashboard'])->name('developer.dashboard');
+        Route::get('/developer/dashboard', function () {
+            return view('developer.dashboard');
+        })->name('developer.dashboard');
     });
 
     // Tableau de bord Client + Gestion des Tickets
