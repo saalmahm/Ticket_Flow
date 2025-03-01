@@ -3,20 +3,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdministratorsTable extends Migration
+class CreateTicketsTable extends Migration
 {
     public function up()
     {
-        Schema::create('administrators', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('title');
+            $table->text('description');
+            $table->string('priority');
+            $table->string('os'); // Assure-toi que ce champ est bien défini et non NULL
+            $table->string('software'); // Assure-toi que ce champ est bien défini et non NULL
+            $table->timestamp('creationDate')->nullable();
+            $table->string('status')->default('Ouvert');
+            $table->foreignId('createdBy')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('administrators');
+        Schema::dropIfExists('tickets');
     }
 }

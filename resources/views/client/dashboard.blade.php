@@ -52,51 +52,53 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
+<form method="POST" action="{{ route('tickets.store') }}">
+    @csrf
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Titre</label>
+        <input type="text" name="title" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+               placeholder="Titre descriptif du problème" required>
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea name="description" rows="3" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Description détaillée du problème" required></textarea>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Priorité</label>
+            <select name="priority" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="Haute">Haute</option>
+                <option value="Moyenne">Moyenne</option>
+                <option value="Basse">Basse</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Système d'exploitation</label>
+            <select name="os" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                <option value="">Choisir...</option>
+                <option value="Windows 11">Windows 11</option>
+                <option value="Windows 10">Windows 10</option>
+                <option value="macOS">macOS</option>
+                <option value="Linux">Linux</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Logiciel concerné</label>
+        <select name="software" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <option value="TicketFlow v2.0">TicketFlow v2.0</option>
+            <option value="Autre">Autre</option>
+        </select>
+    </div>
+    <div class="flex justify-end space-x-3 mt-4">
+        <button type="button" onclick="document.getElementById('createTicketModal').classList.add('hidden')"
+                class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition">Annuler</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Ajouter</button>
+    </div>
+</form>
 
-                <form class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Titre</label>
-                        <input type="text" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                               placeholder="Titre descriptif du problème">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea rows="3" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                  placeholder="Description détaillée du problème"></textarea>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Priorité</label>
-                            <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option>Haute</option>
-                                <option>Moyenne</option>
-                                <option>Basse</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Système d'exploitation</label>
-                            <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option>Windows 11</option>
-                                <option>Windows 10</option>
-                                <option>macOS</option>
-                                <option>Linux</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Logiciel concerné</label>
-                        <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option>TicketFlow v2.0</option>
-                            <option>Autre</option>
-                        </select>
-                    </div>
 
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button type="button" onclick="document.getElementById('createTicketModal').classList.add('hidden')"
-                                class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition">Annuler</button>
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Ajouter</button>
-                    </div>
-                </form>
             </div>
         </div>
     </main>

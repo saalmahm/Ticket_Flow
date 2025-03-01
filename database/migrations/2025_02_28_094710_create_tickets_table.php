@@ -12,15 +12,11 @@ class CreateTicketsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('priority');
-            $table->string('os');
-            $table->string('software');
-            $table->date('creationDate');
-            $table->string('status');
-            $table->date('assignDate')->nullable();
-            $table->unsignedBigInteger('assignedTo')->nullable();
-            $table->unsignedBigInteger('createdBy');
-            $table->foreign('assignedTo')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('createdBy')->references('id')->on('users')->onDelete('cascade');
+            $table->string('os'); 
+            $table->string('software'); 
+            $table->timestamp('creationDate')->nullable();
+            $table->string('status')->default('Ouvert');
+            $table->foreignId('createdBy')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
