@@ -3,45 +3,6 @@
         <h1 class="text-2xl font-bold text-gray-900">Gestion des Développeurs</h1>
     </header>
 
-    <!-- Create Developer Modal -->
-    <div id="createDeveloperModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
-        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-gray-900">Ajouter un nouveau développeur</h3>
-                <button onclick="document.getElementById('createDeveloperModal').classList.add('hidden')" 
-                        class="text-gray-400 hover:text-gray-500">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <form method="POST" action="#">
-                @csrf
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Nom</label>
-                    <input type="text" name="name" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                           placeholder="Nom complet" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
-                           placeholder="Adresse email" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Rôle</label>
-                    <select name="role" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <option value="admin">Admin</option>
-                        <option value="developer">Developer</option>
-                        <option value="client">Client</option>
-                    </select>
-                </div>
-                <div class="flex justify-end space-x-3 mt-4">
-                    <button type="button" onclick="document.getElementById('createDeveloperModal').classList.add('hidden')"
-                            class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition">Annuler</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Ajouter</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <div class="container mx-auto">
         <!-- Developers Table -->
         <div class="mt-8">
@@ -65,7 +26,7 @@
                                 <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Suspendre</button>
                                 <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Supprimer</button>
                                 <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">Assigner Ticket</button>
-                                <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition">Changer Rôle</button>
+                                <button onclick="openRoleModal({{ $developer->id }}, '{{ $developer->role }}')" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition">Changer Rôle</button>
                             </td>
                         </tr>
                         @endforeach
@@ -74,4 +35,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Role Change Modal -->
+    <div id="roleModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-900">Changer le rôle</h3>
+                <button onclick="closeRoleModal()" class="text-gray-400 hover:text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form method="POST" action="{{ route('admin.changeRole') }}">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="developer_id" id="developer_id">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Rôle</label>
+                    <select name="role" id="role" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="admin">Admin</option>
+                        <option value="developer">Developer</option>
+                        <option value="client">Client</option>
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-3 mt-4">
+                    <button type="button" onclick="closeRoleModal()" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition">Annuler</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Changer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openRoleModal(developerId, currentRole) {
+            document.getElementById('developer_id').value = developerId;
+            document.getElementById('role').value = currentRole;
+            document.getElementById('roleModal').classList.remove('hidden');
+        }
+
+        function closeRoleModal() {
+            document.getElementById('roleModal').classList.add('hidden');
+        }
+    </script>
 </x-layout>
