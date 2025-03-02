@@ -13,6 +13,7 @@
                         <tr class="bg-blue-500 text-white">
                             <th class="py-3 px-6 text-left">Nom</th>
                             <th class="py-3 px-6 text-left">Email</th>
+                            <th class="py-3 px-6 text-left">Rôle</th> <!-- Ajout du champ Rôle -->
                             <th class="py-3 px-6 text-left">Ticket Assigné</th>
                             <th class="py-3 px-6 text-left">Actions</th>
                         </tr>
@@ -22,6 +23,7 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-200">
                             <td class="py-3 px-6">{{ $developer->name }}</td>
                             <td class="py-3 px-6">{{ $developer->email }}</td>
+                            <td class="py-3 px-6">{{ $developer->role }}</td> <!-- Affichage du rôle -->
                             <td class="py-3 px-6">
                                 @if ($developer->ticketsAssigned->isNotEmpty())
                                     {{ $developer->ticketsAssigned->first()->title }}
