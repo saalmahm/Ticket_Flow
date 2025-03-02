@@ -6,6 +6,6 @@
     <nav class="p-4 space-y-2">
         <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 p-3 text-blue-700 font-medium">Tableau de bord</a>
         <a href="{{ route('admin.tickets') }}" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-50">Tickets</a>
-        <a href="#" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-50">Développeurs</a>
+        <a href="{{route('admin.developers')}}" class="flex items-center space-x-3 p-3 text-gray-700 hover:bg-gray-50">Développeurs</a>
     </nav>
 </aside>

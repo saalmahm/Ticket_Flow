@@ -24,9 +24,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
-        Route::get('/admin/tickets', function () {
-            return view('admin.tickets');
-        })->name('admin.tickets'); // Route pour la page des tickets
+        Route::get('/admin/tickets', [TicketController::class, 'show'])->name('admin.tickets'); 
+
+        Route::get('/admin/developers',function(){
+            return view('admin.developers');
+        })->name('admin.developers');
     });
 
     // Tableau de bord Développeur
@@ -41,13 +43,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/client/dashboard', [TicketController::class, 'index'])->name('client.dashboard');
 
         // Routes CRUD pour les tickets
-        Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store'); // Ajouter un ticket
-        Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index'); // Liste des tickets
-        Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('tickets.show'); // Voir un ticket
-        Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update'); // Modifier un ticket
-        Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('tickets.destroy'); // Supprimer un ticket
+        Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store'); 
+        Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index'); 
+        Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('tickets.show'); 
+        Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update'); 
+        Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('tickets.destroy'); 
     });
 });
+
 
 // Routes pour la gestion du profil utilisateur
 Route::middleware('auth')->group(function () {

@@ -84,16 +84,23 @@
                         </tr>
                     </thead>
                     <tbody class="bg-gray-100">
+                        @foreach ($tickets as $ticket)
                         <tr class="border-b border-gray-200 hover:bg-gray-200">
-                            <td class="py-3 px-6">Exemple Titre</td>
-                            <td class="py-3 px-6">Description détaillée de l'exemple</td>
-                            <td class="py-3 px-6">Haute</td>
-                            <td class="py-3 px-6">Windows 10</td>
-                            <td class="py-3 px-6">TicketFlow v2.0</td>
-                            <td class="py-3 px-6">Ouvert</td>
-                            <td class="py-3 px-6">2025-03-01</td>
+                            <td class="py-3 px-6">{{ $ticket->title }}</td>
+                            <td class="py-3 px-6">{{ $ticket->description }}</td>
+                            <td class="py-3 px-6">{{ $ticket->priority }}</td>
+                            <td class="py-3 px-6">{{ $ticket->os }}</td>
+                            <td class="py-3 px-6">{{ $ticket->software }}</td>
+                            <td class="py-3 px-6">{{ $ticket->status }}</td>
+                            <td class="py-3 px-6">
+                                @if($ticket->creationDate)
+                                    {{ $ticket->creationDate->format('Y-m-d') }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
                         </tr>
-                        <!-- Ajouter d'autres exemples de tickets ici -->
+                        @endforeach
                     </tbody>
                 </table>
             </div>

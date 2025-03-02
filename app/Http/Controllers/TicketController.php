@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Ticket;
+use Illuminate\Http\Request;use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -12,7 +11,14 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::where('createdBy', Auth::id())->get();
-        return view('client.dashboard', compact('tickets')); 
+        return view('client.dashboard', compact('tickets'));
+    }
+
+    public function show()
+    {
+        // Récupérer tous les tickets
+        $tickets = Ticket::all();
+        return view('admin.tickets', compact('tickets'));
     }
 
     public function store(Request $request)
