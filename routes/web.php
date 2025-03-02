@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\DashboardController; // Inclure le DashboardController
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 
@@ -21,9 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Tableau de bord Admin
     Route::middleware('role:admin')->group(function () {
-        Route::get('/admin/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard'); // Utiliser DashboardController pour afficher les statistiques en temps réel
 
         Route::get('/admin/tickets', [TicketController::class, 'show'])->name('admin.tickets'); 
 

@@ -11,15 +11,15 @@
     <!-- Stats -->
     <div class="grid grid-cols-3 gap-6 mb-8">
         <div class="bg-white rounded-lg p-6 shadow">
-            <h3 class="text-2xl font-bold text-gray-900">152</h3>
+            <h3 class="text-2xl font-bold text-gray-900">{{ $totalTickets }}</h3>
             <p class="text-gray-500">Total Tickets</p>
         </div>
         <div class="bg-white rounded-lg p-6 shadow">
-            <h3 class="text-2xl font-bold text-gray-900">38</h3>
+            <h3 class="text-2xl font-bold text-gray-900">{{ $pendingTickets }}</h3>
             <p class="text-gray-500">En attente</p>
         </div>
         <div class="bg-white rounded-lg p-6 shadow">
-            <h3 class="text-2xl font-bold text-gray-900">12</h3>
+            <h3 class="text-2xl font-bold text-gray-900">{{ $activeDevelopers }}</h3>
             <p class="text-gray-500">Développeurs actifs</p>
         </div>
     </div>
