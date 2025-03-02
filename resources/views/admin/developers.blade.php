@@ -13,6 +13,7 @@
                         <tr class="bg-blue-500 text-white">
                             <th class="py-3 px-6 text-left">Nom</th>
                             <th class="py-3 px-6 text-left">Email</th>
+                            <th class="py-3 px-6 text-left">Ticket Assigné</th>
                             <th class="py-3 px-6 text-left">Actions</th>
                         </tr>
                     </thead>
@@ -21,11 +22,20 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-200">
                             <td class="py-3 px-6">{{ $developer->name }}</td>
                             <td class="py-3 px-6">{{ $developer->email }}</td>
+                            <td class="py-3 px-6">
+                                @if ($developer->ticketsAssigned->isNotEmpty())
+                                    {{ $developer->ticketsAssigned->first()->title }}
+                                @else
+                                    Aucun ticket assigné
+                                @endif
+                            </td>
                             <td class="py-3 px-6 flex space-x-2">
                                 <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">Activer</button>
                                 <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Suspendre</button>
                                 <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Supprimer</button>
-                                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" onclick="openAssignModal({{ $developer->id }})">Assigner Ticket</button>
+                                @if ($developer->ticketsAssigned->isEmpty())
+                                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" onclick="openAssignModal({{ $developer->id }})">Assigner Ticket</button>
+                                @endif
                                 <button onclick="openRoleModal({{ $developer->id }}, '{{ $developer->role }}')" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition">Changer Rôle</button>
                             </td>
                         </tr>

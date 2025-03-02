@@ -11,11 +11,11 @@ class DeveloperController extends Controller
 {
     public function index()
     {
-        $developers = User::where('role', 'developer')->get();
+        $developers = User::where('role', 'developer')->with('ticketsAssigned')->get();
         $tickets = Ticket::whereNull('assignedTo')->get(); // Récupérer les tickets non assignés
         return view('admin.developers', compact('developers', 'tickets'));
     }
-
+    
     public function changeRole(Request $request)
     {
         $developer = User::find($request->developer_id);
