@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\DeveloperController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 
@@ -26,9 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/admin/tickets', [TicketController::class, 'show'])->name('admin.tickets'); 
 
-        Route::get('/admin/developers',function(){
-            return view('admin.developers');
-        })->name('admin.developers');
+        Route::get('/admin/developers', [DeveloperController::class, 'index'])->name('admin.developers');
     });
 
     // Tableau de bord Développeur
@@ -50,7 +49,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('tickets.destroy'); 
     });
 });
-
 
 // Routes pour la gestion du profil utilisateur
 Route::middleware('auth')->group(function () {

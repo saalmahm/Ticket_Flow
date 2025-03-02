@@ -52,15 +52,14 @@
                         <tr class="bg-blue-500 text-white">
                             <th class="py-3 px-6 text-left">Nom</th>
                             <th class="py-3 px-6 text-left">Email</th>
-                            <th class="py-3 px-6 text-left">Rôle</th>
                             <th class="py-3 px-6 text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-gray-100">
+                        @foreach($developers as $developer)
                         <tr class="border-b border-gray-200 hover:bg-gray-200">
-                            <td class="py-3 px-6">Exemple Nom</td>
-                            <td class="py-3 px-6">exemple@example.com</td>
-                            <td class="py-3 px-6">Developer</td>
+                            <td class="py-3 px-6">{{ $developer->name }}</td>
+                            <td class="py-3 px-6">{{ $developer->email }}</td>
                             <td class="py-3 px-6 flex space-x-2">
                                 <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">Activer</button>
                                 <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Suspendre</button>
@@ -69,7 +68,7 @@
                                 <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition">Changer Rôle</button>
                             </td>
                         </tr>
-                        <!-- Ajouter d'autres exemples de développeurs ici -->
+                        @endforeach
                     </tbody>
                 </table>
             </div>
