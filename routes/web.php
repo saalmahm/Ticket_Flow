@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
@@ -28,6 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/admin/developers', [DeveloperController::class, 'index'])->name('admin.developers');
         Route::put('/admin/developers/change-role', [DeveloperController::class, 'changeRole'])->name('admin.changeRole');
+
+        // Route pour assigner un ticket
+        Route::post('/admin/developers/assign-ticket', [DeveloperController::class, 'assignTicket'])->name('admin.assignTicket');
     });
 
     // Tableau de bord Développeur
