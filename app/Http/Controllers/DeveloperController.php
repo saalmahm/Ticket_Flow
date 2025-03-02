@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Developer;
 use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator; // Add this line
 
 class DeveloperController extends Controller
 {
@@ -33,5 +35,31 @@ class DeveloperController extends Controller
         $ticket->save();
 
         return redirect()->route('admin.developers')->with('success', 'Ticket assigné avec succès !');
+    }
+
+    public function dashboard()
+    {
+        $developer = Auth::user(); // Corrected to use the Auth facade
+        $assignedTickets = Ticket::where('assignedTo', $developer->id)->get();
+
+        return view('developer.dashboard', compact('assignedTickets'));
+    }
+
+    public function updateTicketStatus(Request $request, Ticket $ticket)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:En cours,Résolu,Fermé',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('developer.dashboard')
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        $ticket->status = $request->status;
+        $ticket->save();
+
+        return redirect()->route('developer.dashboard')->with('success', 'Statut du ticket mis à jour avec succès.');
     }
 }

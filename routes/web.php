@@ -38,6 +38,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/developer/dashboard', function () {
             return view('developer.dashboard');
         })->name('developer.dashboard');
+
+        Route::middleware('role:developer')->group(function () {
+            Route::get('/developer/dashboard', [DeveloperController::class, 'dashboard'])->name('developer.dashboard');
+            Route::patch('/developer/tickets/{ticket}', [DeveloperController::class, 'updateTicketStatus'])->name('developer.updateTicketStatus');
+        });
     });
 
     // Tableau de bord Client + Gestion des Tickets
