@@ -17,6 +17,7 @@ class CreateTicketsTable extends Migration
             $table->timestamp('creationDate')->nullable();
             $table->string('status')->default('Ouvert');
             $table->foreignId('createdBy')->constrained('users')->onDelete('cascade');
+            $table->foreignId('assignedTo')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

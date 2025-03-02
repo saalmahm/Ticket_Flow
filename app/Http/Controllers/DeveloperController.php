@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Developer;
+use App\Models\Ticket;
+use App\Models\User;
 
 class DeveloperController extends Controller
 {
     public function index()
     {
-        // Récupérer tous les utilisateurs avec le rôle 'developer'
         $developers = User::where('role', 'developer')->get();
-        return view('admin.developers', compact('developers'));
+        $tickets = Ticket::whereNull('assignedTo')->get(); // Récupérer les tickets non assignés
+        return view('admin.developers', compact('developers', 'tickets'));
     }
 
     public function changeRole(Request $request)
@@ -20,6 +22,16 @@ class DeveloperController extends Controller
         $developer->role = $request->role;
         $developer->save();
 
-        return redirect()->route('admin.developers')->with('success', 'Le rôle a été mis à jour avec succès.');
+        return redirect()->route('admin.developers')->with('success', 'Rôle mis à jour avec succès !');
+    }
+
+    // Nouvelle méthode pour assigner un ticket
+    public function assignTicket(Request $request)
+    {
+        $ticket = Ticket::find($request->ticket_id);
+        $ticket->assignedTo = $request->developer_id;
+        $ticket->save();
+
+        return redirect()->route('admin.developers')->with('success', 'Ticket assigné avec succès !');
     }
 }
