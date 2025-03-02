@@ -17,6 +17,7 @@
                             <th class="py-3 px-6 text-left">Système d'exploitation</th>
                             <th class="py-3 px-6 text-left">Logiciel concerné</th>
                             <th class="py-3 px-6 text-left">Statut</th>
+                            <th class="py-3 px-6 text-left">Assigné à</th>
                             <th class="py-3 px-6 text-left">Date de création</th>
                         </tr>
                     </thead>
@@ -29,9 +30,10 @@
                                 <td class="py-3 px-6">{{ $ticket->os }}</td>
                                 <td class="py-3 px-6">{{ $ticket->software }}</td>
                                 <td class="py-3 px-6">{{ $ticket->status }}</td>
+                                <td class="py-3 px-6">{{ $ticket->assignedTo ? $ticket->assignedTo->name : 'N/A' }}</td>
                                 <td class="py-3 px-6">
-                                    @if($ticket->creationDate)
-                                        {{ $ticket->creationDate->format('Y-m-d') }}
+                                    @if($ticket->created_at)
+                                        {{ $ticket->created_at->format('Y-m-d') }}
                                     @else
                                         N/A
                                     @endif
