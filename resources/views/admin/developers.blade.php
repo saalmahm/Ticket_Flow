@@ -30,8 +30,6 @@
                                 @endif
                             </td>
                             <td class="py-3 px-6 flex space-x-2">
-                                <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">Activer</button>
-                                <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">Suspendre</button>
                                 <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Supprimer</button>
                                 @if ($developer->ticketsAssigned->isEmpty())
                                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" onclick="openAssignModal({{ $developer->id }})">Assigner Ticket</button>
