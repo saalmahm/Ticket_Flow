@@ -30,7 +30,7 @@
                                 <td class="py-3 px-6">{{ $ticket->os }}</td>
                                 <td class="py-3 px-6">{{ $ticket->software }}</td>
                                 <td class="py-3 px-6">{{ $ticket->status }}</td>
-                                <td class="py-3 px-6">{{ $ticket->assignedTo ? $ticket->assignedTo->name : 'N/A' }}</td>
+                                <td class="py-3 px-6">{{ $ticket->assignee ? $ticket->assignee->name : 'N/A' }}</td> <!-- Use 'assignee' relationship -->
                                 <td class="py-3 px-6">
                                     @if($ticket->created_at)
                                         {{ $ticket->created_at->format('Y-m-d') }}
